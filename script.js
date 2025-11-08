@@ -67,14 +67,19 @@ contactForm.addEventListener("submit", e => {
   e.preventDefault();
 
   // Get form values
+  const contactPerson = document.getElementById("contactPerson").value;
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const phone = document.getElementById("phone").value;
   const message = document.getElementById("message").value;
 
+  // Get the selected person's name
+  const selectedOption =
+    document.getElementById("contactPerson").selectedOptions[0].text;
+
   // Create WhatsApp message
-  const whatsappNumber = "201014967473";
-  const whatsappMessage = `Hello El-Sherif Company!%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0A%0AMessage:%0A${message}`;
+  const whatsappNumber = contactPerson;
+  const whatsappMessage = `Hello El-Sherif Company!%0A%0ATo: ${selectedOption}%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0A%0AMessage:%0A${message}`;
 
   // Open WhatsApp with pre-filled message
   window.open(
