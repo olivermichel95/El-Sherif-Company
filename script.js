@@ -5,12 +5,14 @@ const navLinks = document.querySelectorAll(".nav-link");
 
 hamburger.addEventListener("click", () => {
   navMenu.classList.toggle("active");
+  hamburger.classList.toggle("active");
 });
 
 // Close menu when clicking on a nav link
 navLinks.forEach(link => {
   link.addEventListener("click", () => {
     navMenu.classList.remove("active");
+    hamburger.classList.remove("active");
   });
 });
 

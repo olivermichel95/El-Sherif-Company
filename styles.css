@@ -358,13 +358,14 @@ ul {
   color: var(--primary-color);
   margin-bottom: 3rem;
   font-weight: 700;
-  background: rgba(230, 57, 70, 0.1);
+  background: var(--primary-color);
   padding: 0.75rem 2rem;
   border-radius: 50px;
   display: inline-block;
   border: 2px solid var(--primary-color);
   letter-spacing: 1px;
   transition: var(--transition);
+  color: var(--white);
 }
 
 .hero-experience:hover {
@@ -783,7 +784,7 @@ section {
 }
 
 .contact-details a {
-  color: var(--primary-color);
+  color: var(--text-light);
   transition: var(--transition);
 }
 
@@ -1067,6 +1068,43 @@ section {
   color: var(--light-gray);
 }
 
+/* ===== WhatsApp Floating Button ===== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+.whatsapp-float:hover {
+  background: #128c7e;
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 5px 30px rgba(37, 211, 102, 0.7);
+  }
+}
+
 /* ===== Scroll to Top Button ===== */
 .scroll-top {
   position: fixed;
@@ -1081,19 +1119,21 @@ section {
   font-size: 1.5rem;
   cursor: pointer;
   opacity: 0;
-  pointer-events: none;
+  visibility: hidden;
   transition: var(--transition);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   z-index: 999;
 }
 
 .scroll-top.active {
   opacity: 1;
-  pointer-events: all;
+  visibility: visible;
 }
 
 .scroll-top:hover {
   background: var(--secondary-color);
   transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== Animations ===== */
@@ -1146,25 +1186,107 @@ section {
 
 /* ===== Responsive Design ===== */
 @media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
   .nav-menu {
     position: fixed;
     left: -100%;
     top: 70px;
     flex-direction: column;
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
     width: 100%;
     text-align: center;
-    transition: 0.3s;
-    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.1);
-    padding: 2rem 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    padding: 2.5rem 0;
+    gap: 0.5rem;
+    border-bottom: 3px solid var(--primary-color);
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
   }
 
   .nav-menu.active {
     left: 0;
   }
 
+  .nav-menu li {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 0.4s ease forwards;
+  }
+
+  .nav-menu.active li:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .nav-menu.active li:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .nav-menu.active li:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .nav-menu.active li:nth-child(4) {
+    animation-delay: 0.25s;
+  }
+  .nav-menu.active li:nth-child(5) {
+    animation-delay: 0.3s;
+  }
+  .nav-menu.active li:nth-child(6) {
+    animation-delay: 0.35s;
+  }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .nav-link {
+    display: block;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    margin: 0 1rem;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(230, 57, 70, 0.1),
+      rgba(255, 107, 122, 0.1)
+    );
+    transform: translateX(5px);
+    color: var(--primary-color);
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
   .hamburger {
     display: flex;
+    z-index: 1001;
+  }
+
+  .hamburger span {
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
   }
 
   .social-links {
