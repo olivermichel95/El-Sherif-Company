@@ -60,6 +60,17 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+      <!-- Floating Industry Icons -->
+      <div class="hero-icons">
+        <i class="fas fa-bolt icon-float icon-1"></i>
+        <i class="fas fa-cog icon-float icon-2"></i>
+        <i class="fas fa-microchip icon-float icon-3"></i>
+        <i class="fas fa-industry icon-float icon-4"></i>
+        <i class="fas fa-plug icon-float icon-5"></i>
+        <i class="fas fa-tools icon-float icon-6"></i>
+        <i class="fas fa-circle-notch icon-float icon-7"></i>
+        <i class="fas fa-power-off icon-float icon-8"></i>
+      </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="hero-logo">
@@ -409,6 +420,22 @@
           </div>
           <div class="contact-form-container">
             <form class="contact-form" id="contactForm">
+              <div class="form-group">
+                <label for="contactPerson"
+                  >Who would you like to contact?</label
+                >
+                <select id="contactPerson" name="contactPerson" required>
+                  <option value="201271190466">
+                    MR/ Sherif Elsaid - General Manager
+                  </option>
+                  <option value="201014967473">
+                    ENG/ Ahmed Sherif - Technical Manager
+                  </option>
+                  <option value="201013576341">
+                    MR/ Yehia Hesham - Sales Manager
+                  </option>
+                </select>
+              </div>
               <div class="form-group">
                 <input
                   type="text"

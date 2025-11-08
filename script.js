@@ -49,15 +49,25 @@ scrollTopBtn.addEventListener("click", () => {
   });
 });
 
-// ===== Navbar Background on Scroll =====
+// ===== Navbar Background on Scroll & Progress Bar =====
 const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
+  // Add scrolled class for background
   if (window.scrollY > 50) {
-    navbar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.15)";
+    navbar.classList.add("scrolled");
   } else {
-    navbar.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+    navbar.classList.remove("scrolled");
   }
+
+  // Calculate scroll progress
+  const windowHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+  const scrolled = (window.scrollY / windowHeight) * 100;
+
+  // Update progress bar width
+  navbar.style.setProperty("--scroll-width", scrolled + "%");
 });
 
 // ===== Contact Form Handling =====
@@ -67,31 +77,34 @@ contactForm.addEventListener("submit", e => {
   e.preventDefault();
 
   // Get form values
-  const contactPerson = document.getElementById("contactPerson").value;
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
+  const phone = document.getElementById("phone").value || "Not provided";
   const message = document.getElementById("message").value;
 
-  // Get the selected person's name
-  const selectedOption =
-    document.getElementById("contactPerson").selectedOptions[0].text;
+  // Email addresses
+  const recipients =
+    "ahmed.sherif.elsaid.99@gmail.com,yehiahesham973@gmail.com";
 
-  // Create WhatsApp message
-  const whatsappNumber = contactPerson;
-  const whatsappMessage = `Hello El-Sherif Company!%0A%0ATo: ${selectedOption}%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0A%0AMessage:%0A${message}`;
+  // Create email subject
+  const subject = `New Message from ${name} - El-Sherif Company Website`;
 
-  // Open WhatsApp with pre-filled message
-  window.open(
-    `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
-    "_blank"
-  );
+  // Create email body
+  const body = `Hello El-Sherif Company,\n\nYou have received a new message from your website:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}\n\n---\nThis message was sent from the El-Sherif Company contact form.`;
 
-  // Reset form
-  contactForm.reset();
+  // Create mailto link
+  const mailtoLink = `mailto:${recipients}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
 
-  // Show success message
-  alert("Thank you for your message! You will be redirected to WhatsApp.");
+  // Open email client
+  window.location.href = mailtoLink;
+
+  // Reset form after a short delay
+  setTimeout(() => {
+    contactForm.reset();
+    alert("Thank you for your message! Your email client should open shortly.");
+  }, 500);
 });
 
 // ===== Scroll Animations =====
@@ -125,6 +138,19 @@ productCategories.forEach(category => {
   category.style.transform = "translateY(30px)";
   category.style.transition = "opacity 0.6s ease, transform 0.6s ease";
   observer.observe(category);
+
+  // Add click toggle for mobile devices
+  category.addEventListener("click", function () {
+    // Toggle active class on this category
+    this.classList.toggle("active");
+
+    // Remove active from other categories
+    productCategories.forEach(otherCategory => {
+      if (otherCategory !== this) {
+        otherCategory.classList.remove("active");
+      }
+    });
+  });
 });
 
 // ===== Active Navigation Link on Scroll =====
