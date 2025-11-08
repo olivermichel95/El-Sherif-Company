@@ -1244,6 +1244,10 @@ section {
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+
   .hero-title {
     font-size: 1.8rem;
     letter-spacing: 1px;
