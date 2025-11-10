@@ -13,6 +13,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/css/intlTelInput.css"
+    />
   </head>
   <body>
     <!-- Navigation -->
@@ -455,11 +459,12 @@
                 />
               </div>
               <div class="form-group">
+                <label for="phone">Phone Number</label>
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
-                  placeholder="Your Phone"
+                  placeholder="Enter phone number"
                 />
               </div>
               <div class="form-group">
@@ -507,7 +512,10 @@
           <div class="footer-section">
             <h3>Contact Info</h3>
             <ul>
-              <li><i class="fas fa-phone"></i> 01271190466 / 01013576341</li>
+              <li>
+                <i class="fas fa-phone"></i> (+20) 127 119 0466 / (+20) 101 357
+                6341
+              </li>
               <li>
                 <i class="fas fa-envelope"></i> ahmed.sherif.elsaid.99@gmail.com
               </li>
@@ -545,7 +553,7 @@
 
     <!-- WhatsApp Floating Button -->
     <a
-      href="https://wa.me/201271190466?text=Hello%20Mr.%20Sherif,%20I%20would%20like%20to%20inquire%20about%20your%20services."
+      href="https://wa.me/201014967473?text=Hello%20Mr.%20Sherif,%20I%20would%20like%20to%20inquire%20about%20your%20services."
       target="_blank"
       rel="noopener noreferrer"
       class="whatsapp-float"
@@ -559,6 +567,7 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/intlTelInput.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

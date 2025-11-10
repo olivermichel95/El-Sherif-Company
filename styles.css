@@ -969,6 +969,103 @@ section {
   resize: vertical;
 }
 
+/* ===== International Phone Input Styling ===== */
+.iti {
+  width: 100%;
+  display: block;
+}
+
+.iti__input {
+  width: 100%;
+  padding: 1rem;
+  padding-left: 52px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  transition: var(--transition);
+  background: var(--white);
+}
+
+.iti__input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.iti__selected-flag {
+  padding: 0 0 0 12px;
+}
+
+.iti__flag-container {
+  padding: 1rem 0;
+}
+
+.iti__country-list {
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid #e0e0e0;
+  max-height: 250px;
+  font-family: "Poppins", sans-serif;
+}
+
+.iti__country {
+  padding: 10px 15px;
+  transition: var(--transition);
+  background-color: var(--white) !important;
+}
+
+.iti__country-name {
+  color: var(--text-dark) !important;
+}
+
+.iti__dial-code {
+  color: var(--text-light) !important;
+}
+
+.iti__country:hover {
+  background-color: var(--light-gray) !important;
+}
+
+.iti__country:hover .iti__country-name {
+  color: var(--text-dark) !important;
+}
+
+.iti__country:hover .iti__dial-code {
+  color: var(--secondary-color) !important;
+}
+
+.iti__country.iti__highlight {
+  background-color: var(--primary-color) !important;
+}
+
+.iti__country.iti__highlight .iti__country-name,
+.iti__country.iti__highlight .iti__dial-code {
+  color: var(--white) !important;
+}
+
+.iti__country.iti__active {
+  background-color: var(--primary-color) !important;
+}
+
+.iti__country.iti__active .iti__country-name,
+.iti__country.iti__active .iti__dial-code {
+  color: var(--white) !important;
+}
+
+.iti__search-input {
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  margin: 10px;
+  width: calc(100% - 20px);
+  font-family: "Poppins", sans-serif;
+}
+
+.iti__search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
 /* ===== Footer ===== */
 .footer {
   background: var(--dark-blue);

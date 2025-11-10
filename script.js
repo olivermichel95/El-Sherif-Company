@@ -72,6 +72,23 @@ window.addEventListener("scroll", () => {
   navbar.style.setProperty("--scroll-width", scrolled + "%");
 });
 
+// ===== International Phone Input =====
+const phoneInput = document.querySelector("#phone");
+let iti = null;
+
+if (phoneInput) {
+  iti = window.intlTelInput(phoneInput, {
+    initialCountry: "eg",
+    preferredCountries: ["eg", "ae", "sa", "kw", "qa", "bh", "om", "us", "gb"],
+    separateDialCode: true,
+    nationalMode: false,
+    autoPlaceholder: "polite",
+    formatOnDisplay: true,
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/utils.js",
+  });
+}
+
 // ===== Contact Form Handling =====
 const contactForm = document.getElementById("contactForm");
 
@@ -81,7 +98,9 @@ contactForm.addEventListener("submit", e => {
   // Get form values
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value || "Not provided";
+  const phone = iti
+    ? iti.getNumber()
+    : document.getElementById("phone").value || "Not provided";
   const message = document.getElementById("message").value;
 
   // Email addresses
