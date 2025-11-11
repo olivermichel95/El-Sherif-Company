@@ -1,0 +1,13 @@
+---
+deployment:
+  tasks:
+    # Set the deployment path - REPLACE 'yourusername' with your actual cPanel username
+    - export DEPLOYPATH=/home/yourusername/public_html/
+
+    # Deploy main HTML, CSS, and JavaScript files
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp styles.css $DEPLOYPATH
+    - /bin/cp script.js $DEPLOYPATH
+
+    # Deploy the entire assets directory with all contents
+    - /bin/cp -R assets $DEPLOYPATH
