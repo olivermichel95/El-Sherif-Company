@@ -11,3 +11,4 @@ deployment:
 
     # Deploy the entire assets directory with all contents
     - /bin/cp -R assets $DEPLOYPATH
+￼

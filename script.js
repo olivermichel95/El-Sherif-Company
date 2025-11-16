@@ -234,4 +234,99 @@ statNumbers.forEach(stat => {
   statsObserver.observe(stat);
 });
 
+// ===== Language Switcher =====
+const langButtons = document.querySelectorAll(".lang-btn");
+const htmlElement = document.documentElement;
+
+// FORCE RESET: Always start with English as default
+// Remove this reset after confirming it works, then it will remember user choice
+localStorage.removeItem("language");
+localStorage.setItem("language", "en");
+let currentLang = "en";
+
+// Initialize language on page load
+function initializeLanguage() {
+  setLanguage(currentLang);
+  updateActiveLangButton(currentLang);
+}
+
+// Set language and update all content
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem("language", lang);
+
+  // Update HTML lang and dir attributes
+  htmlElement.setAttribute("lang", lang);
+  htmlElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+  // Update all elements with data-en and data-ar attributes
+  const elements = document.querySelectorAll("[data-en][data-ar]");
+  elements.forEach(element => {
+    const text = element.getAttribute(`data-${lang}`);
+    if (text) {
+      // Check if it's a title tag
+      if (element.tagName === "TITLE") {
+        element.textContent = text;
+      }
+      // Check if it has innerHTML content that shouldn't be replaced
+      else if (element.children.length === 0) {
+        element.textContent = text;
+      } else {
+        // For elements with children, update only text nodes
+        const walker = document.createTreeWalker(
+          element,
+          NodeFilter.SHOW_TEXT,
+          null,
+          false
+        );
+        const textNodes = [];
+        while (walker.nextNode()) {
+          if (walker.currentNode.nodeValue.trim()) {
+            textNodes.push(walker.currentNode);
+          }
+        }
+        if (textNodes.length > 0) {
+          textNodes[0].nodeValue = text;
+        }
+      }
+    }
+  });
+
+  // Update placeholders
+  const inputsWithPlaceholder = document.querySelectorAll(
+    "[data-placeholder-en][data-placeholder-ar]"
+  );
+  inputsWithPlaceholder.forEach(input => {
+    const placeholder = input.getAttribute(`data-placeholder-${lang}`);
+    if (placeholder) {
+      input.setAttribute("placeholder", placeholder);
+    }
+  });
+
+  // Update active button
+  updateActiveLangButton(lang);
+}
+
+// Update active language button
+function updateActiveLangButton(lang) {
+  langButtons.forEach(btn => {
+    if (btn.getAttribute("data-lang") === lang) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+}
+
+// Add click event to language buttons
+langButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    const lang = button.getAttribute("data-lang");
+    setLanguage(lang);
+  });
+});
+
+// Initialize language when page loads
+initializeLanguage();
+
 console.log("El-Sherif Company Website - Loaded Successfully!");
